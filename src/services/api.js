@@ -81,5 +81,16 @@ export const getTasksByProject = async (projectId) => {
     if (!res.ok) throw new Error('Error updating task');
     return await res.json();
   };
+
+  export const deleteTask = async (taskId) => {
+    const res = await fetch(`${API_URL}/tasks/${taskId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    if (!res.ok) throw new Error('Failed to delete task');
+  };
+  
   
   

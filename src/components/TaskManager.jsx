@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTasksByProject, createTask, updateTask } from '../services/api';
+import { getTasksByProject, createTask, updateTask, deleteTask } from '../services/api';
 
 function TaskManager({ projectId }) {
   const [tasks, setTasks] = useState([]);
@@ -35,6 +35,15 @@ function TaskManager({ projectId }) {
       fetchTasks();
     } catch {
       setError('Failed to update status.');
+    }
+  };
+
+  const handleDelete = async (taskId) => {
+    try {
+      await deleteTask(taskId);
+      fetchTasks();
+    } catch {
+      setError('Failed to delete task.');
     }
   };
 
@@ -74,14 +83,31 @@ function TaskManager({ projectId }) {
           tasks.map((task) => (
             <div
               key={task._id}
-              className="bg-white p-4 border rounded shadow flex flex-col sm:flex-row sm:justify-between sm:items-center"
+              className="relative bg-white p-4 border rounded shadow flex flex-col sm:flex-row sm:justify-between sm:items-center"
             >
+              {/* Delete button */}
+              <button
+                onClick={() => handleDelete(task._id)}
+                className="absolute top-2 right-2 text-red-500 hover:text-red-700 text-xl"
+                title="Delete Task"
+              >
+                ✕
+              </button>
+
               <div>
                 <h2 className="font-semibold text-lg">{task.title}</h2>
                 <p className="text-gray-600">{task.description}</p>
+                <p className="text-sm text-gray-500">
+                  Created: {new Date(task.createdAt).toLocaleString()}
+                </p>
+                {task.status === 'Completed' && task.completedAt && (
+                  <p className="text-sm text-green-600">
+                    Completed: {new Date(task.completedAt).toLocaleString()}
+                  </p>
+                )}
               </div>
 
-              <div className="mt-2 sm:mt-0 flex items-center gap-3">
+              <div className="mt-3 sm:mt-0 flex items-center gap-3">
                 <select
                   value={task.status}
                   onChange={(e) => handleUpdateStatus(task._id, e.target.value)}
