@@ -1,0 +1,67 @@
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+h1, h2, h3 {
+  color: #1f2937;
+}
+
+button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+input, select {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.popup-content h2 {
+  color: #ef4444;
+}
